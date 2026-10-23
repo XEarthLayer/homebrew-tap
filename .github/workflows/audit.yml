@@ -39,8 +39,8 @@ jobs:
           brew style "${casks[@]}"
 
       # The strict audit rejects any version whose GitHub release is marked
-      # pre-release; tracking those is the whole point of the @prerelease cask,
-      # so that one check is excluded for it and nothing else.
+      # pre-release; tracking those is the whole point of the @prerelease casks,
+      # so that one check is excluded for them and nothing else.
       - name: brew audit
         run: |
           shopt -s nullglob
@@ -49,20 +49,22 @@ jobs:
           for cask in "${casks[@]}"; do
             token=$(basename "$cask" .rb)
             except=()
-            [ "$token" = "xearthlayer@prerelease" ] && except=(--except github_prerelease_version)
+            case "$token" in *@prerelease) except=(--except github_prerelease_version) ;; esac
             brew audit --cask --online --strict "${except[@]}" "xearthlayer/tap/$token"
           done
 
       # Install each cask as a user would: Homebrew applies the download
       # quarantine, so running the binary also proves the release is notarized.
       # macFUSE is a kext and cannot load on a hosted runner, so its cask is
-      # skipped; `--version` needs nothing from it.
+      # skipped; `--version` needs nothing from it. Each cask installs the
+      # binary its token names, less any @prerelease: xearthlayer or
+      # xearthlayer-publish.
       - name: Install smoke test
         run: |
           shopt -s nullglob
           for cask in Casks/*.rb; do
             token=$(basename "$cask" .rb)
             brew install --cask --skip-cask-deps "xearthlayer/tap/$token"
-            "$(brew --prefix)/bin/xearthlayer" --version
+            "$(brew --prefix)/bin/${token%@prerelease}" --version
             brew uninstall --cask "xearthlayer/tap/$token"
           done
