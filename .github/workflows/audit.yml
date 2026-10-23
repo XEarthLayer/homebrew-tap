@@ -21,8 +21,15 @@ jobs:
           ln -s "$GITHUB_WORKSPACE" "$TAP"
           brew tap
 
+      # Style the cask files alone: pointed at the whole tap, brew style also
+      # runs rubocop's Markdown plugin over README.md, and its autocorrect has
+      # been seen to rewrite that file.
       - name: brew style
-        run: brew style xearthlayer/tap
+        run: |
+          shopt -s nullglob
+          casks=(Casks/*.rb)
+          if [ ${#casks[@]} -eq 0 ]; then echo "No casks yet."; exit 0; fi
+          brew style "${casks[@]}"
 
       # The strict audit rejects any version whose GitHub release is marked
       # pre-release; tracking those is the whole point of the @prerelease cask,
