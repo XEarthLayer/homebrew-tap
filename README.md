@@ -15,6 +15,15 @@ Recovery); the steps are in XEarthLayer's
 [macOS guide](https://github.com/samsoir/xearthlayer/blob/main/docs/macos.md).
 After installing, run `xearthlayer setup`.
 
+The package publishing tool, which builds XEarthLayer scenery packages from
+Ortho4XP output, has its own pair of casks. It does not need macFUSE, and it
+installs alongside either XEarthLayer cask:
+
+```bash
+brew install --cask xearthlayer/tap/xearthlayer-publish              # stable releases
+brew install --cask xearthlayer/tap/xearthlayer-publish@prerelease   # dev, alpha, beta and rc builds
+```
+
 The binaries are signed with the project's Apple Developer ID and notarized, so
 Homebrew's download quarantine is honoured without any extra step.
 
@@ -23,8 +32,7 @@ Homebrew's download quarantine is honoured without any extra step.
 Nothing here is edited by hand. XEarthLayer's release workflow renders the cask
 for each release from a template in the main repository
 (`pkg/homebrew/`), with the published tarball's SHA-256, and pushes it here: a
-pre-release tag updates `xearthlayer@prerelease`, a stable tag updates
-`xearthlayer`. Every push is audited by this repository's own workflow
+pre-release tag updates the `@prerelease` casks, a stable tag the others. Every push is audited by this repository's own workflow
 (`brew style`, `brew audit --strict --online`, and an install smoke test). To
 report a problem with a cask, open an issue on the
 [main repository](https://github.com/samsoir/xearthlayer/issues).
