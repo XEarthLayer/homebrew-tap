@@ -27,6 +27,9 @@ jobs:
           mkdir -p "$(dirname "$TAP")"
           ln -s "$GITHUB_WORKSPACE" "$TAP"
           brew tap
+          # Homebrew refuses to load casks from an untrusted tap, and `brew audit`
+          # does not grant trust the way a fully qualified `brew install` does.
+          brew trust xearthlayer/tap
 
       # Style the cask files alone: pointed at the whole tap, brew style also
       # runs rubocop's Markdown plugin over README.md, and its autocorrect has
