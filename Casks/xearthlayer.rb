@@ -1,5 +1,5 @@
 # Rendered by scripts/homebrew/render-cask.sh from a stable release; do not edit
-# the copy in the tap by hand. The placeholders are 0.5.0, 372a54acc4a2bd41ebc3315d6102ecc0a2880ad0b9b8c4b8c6714bf2486e60c3, samsoir/xearthlayer.
+# the copy in the tap by hand: change pkg/homebrew/xearthlayer.rb.tmpl instead.
 cask "xearthlayer" do
   version "0.5.0"
   sha256 "372a54acc4a2bd41ebc3315d6102ecc0a2880ad0b9b8c4b8c6714bf2486e60c3"
