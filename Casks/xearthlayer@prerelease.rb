@@ -1,9 +1,9 @@
 # Rendered by scripts/homebrew/render-cask.sh from a pre-release (dev, alpha,
 # beta, rc); do not edit the copy in the tap by hand. The placeholders are
-# 0.5.1-beta.3, 632c4559308da50fb5c33a7e48c8872708ab04976225976601ea26ff71aaa812, samsoir/xearthlayer.
+# 0.5.1-beta.4, f252fadcb326c45559a053ed6640416ec5f086583f28bb08d545674e084003a0, samsoir/xearthlayer.
 cask "xearthlayer@prerelease" do
-  version "0.5.1-beta.3"
-  sha256 "632c4559308da50fb5c33a7e48c8872708ab04976225976601ea26ff71aaa812"
+  version "0.5.1-beta.4"
+  sha256 "f252fadcb326c45559a053ed6640416ec5f086583f28bb08d545674e084003a0"
 
   url "https://github.com/samsoir/xearthlayer/releases/download/v#{version}/xearthlayer-v#{version}-arm64-macos.tar.gz"
   name "XEarthLayer (pre-release)"
